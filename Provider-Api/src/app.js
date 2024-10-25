@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const logger = require('./utils/logger');
 const providerRoutes = require('./routes/providerRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
 
 // Load env vars
 dotenv.config();
@@ -14,25 +15,30 @@ require('./config/database');
 // Body parser
 app.use(express.json());
 
+// Mount routes
+app.use('/api/providers', providerRoutes);
+app.use('/api/services', serviceRoutes);
+
 // Test route
 app.get('/test', (req, res) => {
     res.json({ message: 'API is working!' });
 });
 
-// Mount routes
-app.use('/api/providers', providerRoutes);
-
-// Handle basic errors
+// Error handler
 app.use((err, req, res, next) => {
     logger.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json({
+        success: false,
+        error: 'Server Error'
+    });
 });
 
-const PORT = process.env.PORT || 3000;
-
-const server = app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    logger.info(`Server is running on port ${PORT}`);
-});
+// Seulement démarrer le serveur si ce n'est pas un test
+if (process.env.NODE_ENV !== 'test') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        logger.info(`Server running on port ${PORT}`);
+    });
+}
 
 module.exports = app;

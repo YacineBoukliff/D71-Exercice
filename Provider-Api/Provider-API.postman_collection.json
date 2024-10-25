@@ -1,0 +1,111 @@
+{
+    "info": {
+        "name": "Provider API",
+        "description": "Collection pour tester l'API de gestion des prestataires et services",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Providers",
+            "item": [
+                {
+                    "name": "Get All Providers",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:3000/api/providers"
+                    }
+                },
+                {
+                    "name": "Create Provider",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:3000/api/providers",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone\": \"1234567890\",\n    \"address\": \"123 Main St\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Update Provider",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:3000/api/providers/:id",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"John Updated\",\n    \"email\": \"john.updated@example.com\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Provider",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:3000/api/providers/:id"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Services",
+            "item": [
+                {
+                    "name": "Get All Services",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:3000/api/services"
+                    }
+                },
+                {
+                    "name": "Create Service",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:3000/api/services",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Service Test\",\n    \"description\": \"Description du service\",\n    \"price\": 100,\n    \"provider\": \"PROVIDER_ID\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Update Service",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:3000/api/services/:id",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Service Updated\",\n    \"price\": 150\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Service",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:3000/api/services/:id"
+                    }
+                }
+            ]
+        }
+    ]
+}
